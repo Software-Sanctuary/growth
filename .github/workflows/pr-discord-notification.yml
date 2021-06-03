@@ -12,6 +12,8 @@ jobs:
           run: echo "Sending message to discord"
         - name: Send PR notification message to Discord Channel
           uses: appleboy/discord-action@0.0.3
+          env: 
+            name: Discord
           with:
             # discord webhook id
             webhook_id: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_ID }}
