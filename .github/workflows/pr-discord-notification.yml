@@ -2,7 +2,8 @@
   uses: appleboy/discord-action@0.0.3
   on:
     pull_request:
-      branches: [master]
+      branches: 
+        - master
   with:
     # discord webhook id
     webhook_id: 849938378282631169
