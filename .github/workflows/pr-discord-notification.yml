@@ -1,12 +1,18 @@
-- name: CI - Notify PR to Discord Channel
-  uses: appleboy/discord-action@0.0.3
-  on:
-    pull_request:
-      branches: 
-        - master
-  with:
-    # discord webhook id
-    webhook_id: 849938378282631169
-    # discord webhook token
-    webhook_token: EROHxk-QEdEn0WyXb8_A211W-RiKUWIKseDiuzD0AyqNaLaWuoMOxj1kn65P4zpBYLDg
-    message: "A PR has been opened for growth-framework"
+name: CI - Notify PR to Discord Channel
+on:
+  pull_request:
+    branches: 
+      - master
+jobs:
+    build:
+      name: Build
+      runs-on: ubuntu-latest
+      steps:
+        - uses: appleboy/discord-action@0.0.3
+        - name: Send PR notification message to Discord Channel
+          with:
+            # discord webhook id
+            webhook_id: 849938378282631169
+            # discord webhook token
+            webhook_token: EROHxk-QEdEn0WyXb8_A211W-RiKUWIKseDiuzD0AyqNaLaWuoMOxj1kn65P4zpBYLDg
+            message: "A PR has been opened for growth-framework"
