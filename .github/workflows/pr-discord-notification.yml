@@ -8,11 +8,14 @@ jobs:
       name: Build
       runs-on: ubuntu-latest
       steps:
-        - uses: appleboy/discord-action@0.0.3
+        - name: Notify Action
+          run: echo "Sending message to discord"
         - name: Send PR notification message to Discord Channel
+        - uses: appleboy/discord-action@0.0.3
           with:
             # discord webhook id
             webhook_id: 849938378282631169
             # discord webhook token
             webhook_token: EROHxk-QEdEn0WyXb8_A211W-RiKUWIKseDiuzD0AyqNaLaWuoMOxj1kn65P4zpBYLDg
+            color: "#48f442"
             message: "A PR has been opened for growth-framework"
