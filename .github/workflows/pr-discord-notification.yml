@@ -14,8 +14,8 @@ jobs:
           uses: appleboy/discord-action@0.0.3
           with:
             # discord webhook id
-            webhook_id: 849938378282631169
+            webhook_id: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_ID }}
             # discord webhook token
-            webhook_token: EROHxk-QEdEn0WyXb8_A211W-RiKUWIKseDiuzD0AyqNaLaWuoMOxj1kn65P4zpBYLDg
+            webhook_token: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_TOKEN }}
             color: "#48f442"
             message: "A PR has been opened for growth-framework"
