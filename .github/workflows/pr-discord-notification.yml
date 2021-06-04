@@ -15,6 +15,10 @@ jobs:
           github-token: ${{ secrets.GH_TKN }}
           # Only return if PR is still open
           filterOutClosed: true
+        env:
+          PR_NO: ${{ steps.PR.outputs.number }}
+          PR_TITLE: ${{ steps.PR.outputs.pr_title }}
+          PR_URL: ${{ steps.PR.outputs.pr_url }}
       - name: Notify Action
         run: echo "Sending message to discord"
       - name: Send PR notification message to Discord Channel
@@ -27,6 +31,6 @@ jobs:
           color: "#48f442"
           message: |
             > A PR has been opened for growth-framework
-            **Title:** ${{ steps.PR.outputs.pr_title }}
-            **URL:** ${{ steps.PR.outputs.pr_url }}
-            **#:** ${{ steps.PR.outputs.number }}
+            **#:** ${{ PR_NO }}
+            **Title:** ${{ PR_TITLE }}
+            **URL:** ${{ PR_URL }}
