@@ -10,7 +10,7 @@ jobs:
       steps:
       - uses: actions/checkout@v1
       - uses: 8BitJonny/gh-get-current-pr@1.1.0
-        id: PR
+        id: pr_vars
         with:
           github-token: ${{ secrets.GH_TKN }}
           # Only return if PR is still open
@@ -27,6 +27,6 @@ jobs:
           color: "#48f442"
           message: |
             > A PR has been opened for growth-framework
-            **Title:** ${{ steps.PR.outputs.pr_title }}
-            **URL:** ${{ steps.PR.outputs.pr_url }}
-            **#:** ${{ steps.PR.outputs.number }}
+            **#:** ${{ steps.pr_vars.outputs.number }}
+            **Title:** ${{ steps.pr_vars.outputs.pr_title }}
+            **URL:** ${{ steps.pr_vars.outputs.pr_url }}

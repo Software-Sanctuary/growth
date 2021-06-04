@@ -1,0 +1,22 @@
+repos:
+  - repo: git://github.com/dnephin/pre-commit-golang
+    rev: v0.3.5
+    hooks:
+      - id: golangci-lint
+        args: [--fix]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: detect-private-key
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: check-json
+      - id: check-vcs-permalinks
+  - repo: local
+    hooks:
+      -   id: tidy
+          name: Go Mod tidy
+          entry: ./bin/tidy.sh
+          language: script
+          files: go.sum
