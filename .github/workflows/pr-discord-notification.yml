@@ -8,8 +8,10 @@ jobs:
       name: Build
       runs-on: ubuntu-latest
       steps:
-        - uses: appleboy/discord-action@0.0.3
-        - uses: repo-sync/pull-request@v2
+        - name: Load Discord Webhook Library
+          uses: appleboy/discord-action@0.0.3
+        - name: Load Pull Request
+          uses: repo-sync/pull-request@v2
         - name: Notify Action
           run: echo "Sending message to discord"
         - name: Send PR notification message to Discord Channel
