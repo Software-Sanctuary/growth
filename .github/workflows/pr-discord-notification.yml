@@ -18,4 +18,7 @@ jobs:
             # discord webhook token
             webhook_token: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_TOKEN }}
             color: "#48f442"
-            message: "A PR has been opened for growth-framework"
+            message: |
+              A PR has been opened for growth-framework  
+              URL: ${{steps.open-pr.outputs.pr_url}}
+              #: ${{steps.open-pr.outputs.pr_number}}
