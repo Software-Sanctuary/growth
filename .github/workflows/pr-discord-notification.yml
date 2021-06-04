@@ -8,21 +8,25 @@ jobs:
       name: Build
       runs-on: ubuntu-latest
       steps:
-        - name: Load Pull Request
-          uses: repo-sync/pull-request@v2
-          env:
-            GITHUB_TOKEN: ${{ secrets.GH_TKN }}
-        - name: Notify Action
-          run: echo "Sending message to discord"
-        - name: Send PR notification message to Discord Channel
-          uses: appleboy/discord-action@0.0.3
-          with:
-            # discord webhook id
-            webhook_id: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_ID }}
-            # discord webhook token
-            webhook_token: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_TOKEN }}
-            color: "#48f442"
-            message: |
-              A PR has been opened for growth-framework  
-              URL: ${{steps.open-pr.outputs.pr_url}}
-              #: ${{steps.open-pr.outputs.pr_number}}
+      - uses: actions/checkout@v1
+      - uses: 8BitJonny/gh-get-current-pr@1.1.0
+        id: PR
+        with:
+          github-token: ${{ secrets.GH_TKN }}
+          # Only return if PR is still open
+          filterOutClosed: true
+      - name: Notify Action
+        run: echo "Sending message to discord"
+      - name: Send PR notification message to Discord Channel
+        uses: appleboy/discord-action@0.0.3
+        with:
+          # discord webhook id
+          webhook_id: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_ID }}
+          # discord webhook token
+          webhook_token: ${{ secrets.DISCORD_PR_REQUESTS_WEBHOOK_TOKEN }}
+          color: "#48f442"
+          message: |
+            > A PR has been opened for growth-framework
+            **Title:** ${{ steps.PR.outputs.pr_title }}
+            **URL:** ${{ steps.PR.outputs.pr_url }}
+            **#:** ${{ steps.PR.outputs.number }}
