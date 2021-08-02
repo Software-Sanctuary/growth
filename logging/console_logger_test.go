@@ -4,9 +4,9 @@ import (
 	"testing"
 )
 
-func TestConsoleLogger_Info(t *testing.T) {
+func TestConsoleLogger(t *testing.T) {
 	logger := ConsoleLogger{}
-	logger.InitializeLogger()
+	logger.NewConsoleLogger("logging:TestConsoleLogger")
 	t.Run("Logs an info message", func(t *testing.T) {
 		logger.Info("This is an info message")
 	})

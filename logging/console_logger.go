@@ -1,6 +1,7 @@
 package logging
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -8,34 +9,64 @@ import (
 )
 
 type ConsoleLogger struct {
-	LoggingConfig Config
-	Logger        *log.Logger
+	PackageFunctionName string
+	LoggingConfig       Config
+	Logger              *log.Logger
 }
 
-func (dl *ConsoleLogger) InitializeLogger() {
+func (dl *ConsoleLogger) NewConsoleLogger(pkgFuncName string) {
 	dl.Logger = log.Default()
+	dl.PackageFunctionName = pkgFuncName
 }
 
 func (dl *ConsoleLogger) Warn(message string) {
-	message = console.ColorYellow + "WARN: " + message + console.ColorReset
+	message = fmt.Sprintf(
+		"%s %s %s %s %s",
+		console.ColorYellow,
+		dl.PackageFunctionName,
+		WarningHead,
+		message,
+		console.ColorReset,
+		)
 	dl.Logger.SetOutput(os.Stdout)
 	dl.Logger.Println(message)
 }
 
 func (dl *ConsoleLogger) Error(message string) {
-	message = console.ColorRed + "ERROR: " + message + console.ColorReset
+	message = fmt.Sprintf(
+		"%s %s %s %s %s",
+		console.ColorRed,
+		dl.PackageFunctionName,
+		ErrorHead,
+		message,
+		console.ColorReset,
+	)
 	dl.Logger.SetOutput(os.Stderr)
 	dl.Logger.Println(message)
 }
 
 func (dl *ConsoleLogger) Info(message string) {
-	message = console.ColorBlue + "INFO: " + message + console.ColorReset
+	message = fmt.Sprintf(
+		"%s %s %s %s %s",
+		console.ColorBlue,
+		dl.PackageFunctionName,
+		InfoHead,
+		message,
+		console.ColorReset,
+	)
 	dl.Logger.SetOutput(os.Stdout)
 	dl.Logger.Println(message)
 }
 
 func (dl *ConsoleLogger) Debug(message string) {
-	message = console.ColorGreen + "DEBUG: " + message + console.ColorReset
+	message = fmt.Sprintf(
+		"%s %s %s %s %s",
+		console.ColorGreen,
+		dl.PackageFunctionName,
+		DebugHead,
+		message,
+		console.ColorReset,
+	)
 	dl.Logger.SetOutput(os.Stdout)
 	dl.Logger.Println(message)
 }
