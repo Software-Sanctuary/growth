@@ -3,8 +3,10 @@ package mapper
 import (
 	"errors"
 	"fmt"
-	"github.com/gokhantamkoc/growth-framework/logging"
 	"reflect"
+
+	"github.com/fatih/structs"
+	"github.com/gokhantamkoc/growth-framework/logging"
 )
 
 func ReadTag(obj interface{}, fieldName, tagName string) (string, error) {
@@ -29,4 +31,28 @@ func ReadTag(obj interface{}, fieldName, tagName string) (string, error) {
 		return "", errors.New(errMessage)
 	}
 	return fieldTag, nil
+}
+
+func MapObject(objFrom interface{}, objTo interface{}) {
+	logger := &logging.ConsoleLogger{}
+	logger.NewConsoleLogger("mapper:Map")
+	mapObjFrom := structs.Map(objFrom)
+	for key, val := range mapObjFrom {
+		if _, hasField := reflect.TypeOf(objTo).FieldByName(key); hasField {
+			newValue := reflect.New(reflect.TypeOf(val))
+			newValue.Elem().Set(reflect.ValueOf(val))
+			reflect.ValueOf(objTo).FieldByName(key).Set(reflect.ValueOf(newValue))
+		}
+	}
+
+	// objFromType := reflect.TypeOf(objFrom)
+	// for fieldIndex := 0; fieldIndex < objFromType.NumField(); fieldIndex++ {
+	//	fieldNameToMap := objFromType.Field(fieldIndex).Name
+	//	if field, hasField := reflect.TypeOf(objTo).FieldByName(fieldNameToMap); hasField {
+	//		fieldValue := reflect.ValueOf(field)
+	//		newValue := reflect.New(reflect.TypeOf(objFromType.Field(fieldIndex)))
+	//		newValue.Elem().Set(fieldValue)
+	//		reflect.(&objTo).Elem().FieldByName(fieldNameToMap).Set(newValue)
+	//	}
+	// }
 }

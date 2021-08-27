@@ -13,10 +13,10 @@ repos:
       - id: check-yaml
       - id: check-json
       - id: check-vcs-permalinks
-  - repo: local
-    hooks:
-      -   id: tidy
-          name: Go Mod tidy
-          entry: ./bin/tidy.sh
-          language: script
-          files: go.sum
+#  - repo: local
+#    hooks:
+#      -   id: tidy
+#          name: Go Mod tidy
+#          entry: /bin/bash ./bin/lint.sh
+#          language: script
+#          files: go.sum

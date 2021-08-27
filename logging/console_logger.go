@@ -27,7 +27,7 @@ func (dl *ConsoleLogger) Warn(message string) {
 		WarningHead,
 		message,
 		console.ColorReset,
-		)
+	)
 	dl.Logger.SetOutput(os.Stdout)
 	dl.Logger.Println(message)
 }
